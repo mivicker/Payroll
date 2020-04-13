@@ -1,19 +1,30 @@
 package com.company;
 
+import java.util.Map;
+
 public class Employee {
     double hourlyRate;
     double hoursWorked;
     String name;
-    double basePay;
-    double totalPay;
 
-    public Employee(double hourlyRate, double hoursWorked, String name) {
-        this.hourlyRate = hourlyRate;
-        this.hoursWorked = hoursWorked;
+    public Employee(String name) {
+        this.hourlyRate = 20.75;
         this.name = name;
-        this.basePay = 100000;
     }
-    public double CalcPay() {
+
+    public void addToMap(Map<String, Double> empMap) {
+        empMap.put(name, hoursWorked);
+    }
+
+    public void updateMap(Map<String, Double> empMap) {
+        empMap.replace(name, hoursWorked);
+    }
+
+    public void addHours(double hours) {
+        hoursWorked += hours;
+    }
+
+    public double calcPay() {
         return this.hoursWorked * this.hourlyRate;
     }
 }
