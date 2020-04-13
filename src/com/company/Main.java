@@ -1,43 +1,58 @@
 package com.company;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, Map<String, Map<String, Object>>> employees = new HashMap<String, Map<String, Map<String, Object>>>();
-/*        String employeeName = inputString("What is the employee's name?");
-        double hoursWorked = inputDouble("How many hours has the employee worked?");
-        double additions = inputDouble("Does the employee have any additions to add?");
-        double allowances = inputDouble("Does the employee have any allowances to add?");
-
-        Manager kristyn = new Manager(employeeName);
-        System.out.println(kristyn.name + ":");
-        System.out.println(kristyn.calcPay());*/
-        entryQuestion();
-    }
-    public static void entryQuestion() {
-        while (true) {
+       Filereaderwriter readerWriter = new Filereaderwriter("src/payrollDB.txt");
+         while (true) {
             int userInput = inputInt("Welcome to the payroll app are you an employee[1] or a manager[2]?");
             if (userInput == 1) {
-                employeeWorkflow();
+                employeeWorkflow(readerWriter);
                 break;
             } else if (userInput == 2) {
-                managerWorkflow();
+                managerWorkflow(readerWriter);
                 break;
             }
             System.out.println("Invalid response. Please try again.");
         }
-
     }
 
-    private static void managerWorkflow() {
-        String name = inputString("What is the new employee's name");
-        System.out.println("I actually don't care.");
+    private static void managerWorkflow(Filereaderwriter readerWriter) {
+        while (true) {
+            int userInput = inputInt("[1] to view employees and hours worked [2] to add a new employee [3] to exit.");
+            if (userInput == 1) {
+                readerWriter.readAllFromPayroll();
+                userInput = inputInt("[1] to do something else [2] to quit");
+                if (userInput == 1) {
+                    continue;
+                } else {
+                    System.out.println("Thank you for using the payroll program.");
+                    break;
+                }
+            } else if (userInput == 2) {
+                break;
+            } else if (userInput ==3) {
+                System.out.println("Thank you for using the payroll program.");
+                break;
+            }
+            System.out.println("Invalid response. Please try again.");
+        }
+        int userInput = inputInt("[1] to view employees and hours worked [2] to add a new employee [3] to exit.");
     }
-    private static void employeeWorkflow() {
-        System.out.println("I don't work for you.");
+    private static void employeeWorkflow(Filereaderwriter readerWriter) {
+        while(true){
+        int userInput = inputInt("[1] to view hours [2] to add hours [3] exit.");
+            if (userInput == 1) {
+                break;
+            } else if (userInput == 2) {
+                break;
+            } else if (userInput ==3) {
+                System.out.println("Thank you for using the payroll program.");
+                break;
+            }
+            System.out.println("Invalid response. Please try again.");
+        }
     }
     private static String inputString(String displayString) {
         System.out.println(displayString);
